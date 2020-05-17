@@ -38,13 +38,14 @@ public class HierarchicCache extends AbstractValueAdaptingCache {
 	}
 
 	// 已知问题： L1 L2 L3   L3比L1先过期，L1就只能等过期后才可更新缓存
-
-	// TODO: 2020/5/16 synchronized
-	// TODO: 2020/5/16 fallback AbstractCacheInvoker already fallback ?
+	// 已知问题： L1 L2 L3
+	// lookup(Object key) & get(Object key, Callable<T> valueLoader)
+	// 过于依赖其他层级缓存的put方法，增加了报错概率
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public synchronized <T> T get(Object key, Callable<T> valueLoader) {
+		// TODO: 2020/5/17 并发问题
 		ValueWrapper result = get(key);
 
 		if (result != null) {
