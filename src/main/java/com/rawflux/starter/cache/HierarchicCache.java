@@ -64,6 +64,7 @@ public class HierarchicCache extends AbstractValueAdaptingCache {
 			ValueWrapper valueWrapper = cache.get(key);
 			if (valueWrapper != null) {
 				obtain = valueWrapper.get();
+				break;
 			} else {
 				permeateCaches.add(cache);
 			}
