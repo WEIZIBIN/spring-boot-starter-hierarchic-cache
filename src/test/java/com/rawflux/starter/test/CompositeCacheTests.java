@@ -57,9 +57,9 @@ public class CompositeCacheTests {
 
 	@Test
 	public void testL1HasValueAndL2Doesnt() {
-		Cache hc1 = hierarchicCacheManager.getCache("c1");
-		Cache l1cache = l1CacheManager.getCache("c1");
-		Cache l2cache = l2CacheManager.getCache("c1");
+		Cache hc1 = hierarchicCacheManager.getCache("bothCacheNoTtl");
+		Cache l1cache = l1CacheManager.getCache("bothCacheNoTtl");
+		Cache l2cache = l2CacheManager.getCache("bothCacheNoTtl");
 		assertTrue(l1cache instanceof ConcurrentMapCache);
 		l1cache.put("key1", "value1");
 		assertEquals("value1", l1cache.get("key1").get());
@@ -74,9 +74,9 @@ public class CompositeCacheTests {
 
 	@Test
 	public void testL1NonValueAndL2Has() {
-		Cache hc1 = hierarchicCacheManager.getCache("c1");
-		Cache l1cache = l1CacheManager.getCache("c1");
-		Cache l2cache = l2CacheManager.getCache("c1");
+		Cache hc1 = hierarchicCacheManager.getCache("bothCacheNoTtl");
+		Cache l1cache = l1CacheManager.getCache("bothCacheNoTtl");
+		Cache l2cache = l2CacheManager.getCache("bothCacheNoTtl");
 		assertTrue(l1cache instanceof ConcurrentMapCache);
 		l2cache.put("key1", "value1");
 		assertNull(l1cache.get("key1"));

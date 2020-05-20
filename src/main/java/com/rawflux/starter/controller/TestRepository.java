@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author weizibin
@@ -16,7 +15,7 @@ public class TestRepository {
 
 	private static final Logger log = LoggerFactory.getLogger(TestRepository.class);
 
-	@Cacheable("c1")
+	@Cacheable(value = "bothCacheNoTtl", sync = true)
 	public String get() {
 		log.info("get from repository");
 		return "my value";

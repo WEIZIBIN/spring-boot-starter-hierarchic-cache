@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.lang.NonNull;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author weizibin
@@ -26,13 +26,14 @@ public class HierarchicCacheManager implements CacheManager {
 	}
 
 	@Override
-	@NonNull
 	public Cache getCache(String s) {
 		List<Cache> caches = new ArrayList<>();
 		for (CacheManager cacheManager : cacheManagers) {
 			Optional.ofNullable(cacheManager.getCache(s)).ifPresent(caches::add);
 		}
-		return new HierarchicCache(s, caches, configuration.getAllowNullValue());
+
+		return CollectionUtils.isEmpty(caches) ? null :
+				new HierarchicCache(s, caches, configuration.getAllowNullValue());
 	}
 
 	@Override

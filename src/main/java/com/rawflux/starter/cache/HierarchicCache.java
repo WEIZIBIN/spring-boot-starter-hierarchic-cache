@@ -33,7 +33,7 @@ public class HierarchicCache extends AbstractValueAdaptingCache {
 	}
 
 	@Override
-	public Object getNativeCache() {
+	public HierarchicCache getNativeCache() {
 		return this;
 	}
 
@@ -45,7 +45,6 @@ public class HierarchicCache extends AbstractValueAdaptingCache {
 	@Override
 	@SuppressWarnings("unchecked")
 	public synchronized <T> T get(Object key, Callable<T> valueLoader) {
-		// TODO: 2020/5/17 并发问题
 		ValueWrapper result = get(key);
 
 		if (result != null) {
@@ -69,6 +68,10 @@ public class HierarchicCache extends AbstractValueAdaptingCache {
 			} else {
 				permeateCaches.add(cache);
 			}
+		}
+
+		if (obtain == null) {
+			return null;
 		}
 
 		for (Cache permeateCache : permeateCaches) {

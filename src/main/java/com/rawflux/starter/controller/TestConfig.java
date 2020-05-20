@@ -24,7 +24,7 @@ public class TestConfig {
 		ConcurrentMapCacheManager concurrentMapCacheManager = new ConcurrentMapCacheManager();
 
 		net.sf.ehcache.config.Configuration cacheConfig = new net.sf.ehcache.config.Configuration();
-		cacheConfig.addCache(new CacheConfiguration().maxEntriesLocalHeap(1000).name("c1").timeToLiveSeconds(30).timeToIdleSeconds(0));
+		cacheConfig.addCache(new CacheConfiguration().maxEntriesLocalHeap(1000).name("bothCacheNoTtl").timeToLiveSeconds(30).timeToIdleSeconds(0));
 		EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager();
 		net.sf.ehcache.CacheManager ehcacheManger = net.sf.ehcache.CacheManager.create(cacheConfig);
 		ehCacheCacheManager.setCacheManager(ehcacheManger);
